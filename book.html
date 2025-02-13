@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhi Valentine Special</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message From Abhi💖
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Valentine Day Special 
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Some people come into our lives unexpectedly, yet leave a lasting impact. You are one of those rare souls who make every moment feel a little more special.
+
+        From the very first conversation, something about you stood out—your kindness, your charm, and the effortless way you make the world around you brighter.
+        
+        This isn’t just a collection of words; it’s a small way of showing how much you mean to me. A way to remind you that you are appreciated, admired, and truly special.
+        
+        So, here’s to us—our conversations, our connection, and the beautiful moments yet to come. 💖</p>
+
+          <p>
+            Going Next Before Start Reading... <br />Since we connect in
+            Office on February 2024...
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>Strangers to Colleagues ❤️✨</h2>
+          <p>
+            The first day we met, we were just two strangers crossing paths in the office.
+
+A simple hello, a shared workspace, and casual conversations marked the beginning of something special. 💖
+
+We didn’t know it then, but fate had a beautiful god plan for us. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Colleagues to Friends ✨💖</h2>
+          <p>
+            As days turned into weeks, we found ourselves working together, sharing laughs, and getting to know each other better. 
+            Slowly, the walls of formality broke down, and a beautiful friendship began to blossom. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>From Friends to Best Friends 💫✨</h2>
+          <p>
+            Through long talks, endless support, and unforgettable moments, our bond deepened. 
+            You became my confidant, my partner-in-crime, and the person I could always count on. 
+            With every passing day, our connection grew stronger, and life felt brighter with you by my side. 🌟
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Best Friends to Love Birds🤞💖</h2>
+          <p>
+            Somewhere between our laughter and heartfelt conversations, love found its way into our hearts. 
+            We realized that we weren’t just best friends—we were meant for each other. 
+            Every moment spent together became more meaningful, and my heart knew you were the one. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Special Day, A Special Question 💫💖</h1>
+          <p>
+            Today is the day I pour my heart out to you. 
+            From the first moment we met to this very moment, you have been the most beautiful part of my life. 
+            And now, on this special day, I have just one question to ask... ✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>Will You Be Mine? 💖✨</h1>
+          <p>
+            You are my best friend, my love, and my forever. 
+            With all my heart, I ask—will you be mine, today, tomorrow, and always? 
+            Happy Valentine’s Day, Sanuu 💕
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Our Dreams Together ✨💖</h2>
+          <p>
+            As we step into this new chapter of our lives, 
+            I dream of all the wonderful moments we will share—traveling the world, 
+            building a home filled with love and laughter, and supporting each other through every joy and challenge. 
+            With you, every dream feels possible. 💖✨
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Love That Lasts Forever ✨💖</h2>
+          <p>
+            Our love story is only just beginning. 
+            No matter where life takes us, I promise to cherish, support and love you endlessly. 
+            Together, we will create a lifetime of beautiful memories, hand in hand, heart to heart. Here’s to forever, my love. 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>A Happy Beginning🌹❤</h2>
+          <p>
+            As we take this next step, I feel nothing but happiness and excitement for the life we will share. 
+            Every chapter of our story has been filled with love, laughter, and unforgettable moments, and I know the best is yet to come. 
+            Our love is a journey, and I am grateful for every step we take together. 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Ending That Never Ends ❤️✨</h2>
+          <p>Though this book may end, our story never will. With you, every day is a new adventure, 
+            a new reason to smile, and a new way to fall in love all over again. 
+            No matter what life brings, I promise to be by your side, loving you endlessly. 
+            This is not just our love story—it’s our forever story. 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3
+            style="
+              color: rgb(255, 255, 255);
+              
+            
+            "
+            >
+            You are the one who fills my heart with joy and peace.</h3>
+
+          <h4
+            style="
+              color: rgb(255, 255, 255);
+              font-size: 20px; position: fixed;
+            bottom: 50px;
+            width:90%; 
+            text-align: center;
+            
+        
+            "
+          >
+            Will you be my Radha?
+          </h4>
+          <p 
+            style="
+            position: fixed; bottom: 20px; width:90%; text-align: center; color: rgb(255, 255, 255); font-size: 4px; margin-right: 20px;">
+            <br />
+            <a href="https://www.instagram.com/abhiiiiii_5665/" target="_blank" rel="nofollow">Copyright: Abhi Jadhav</a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
